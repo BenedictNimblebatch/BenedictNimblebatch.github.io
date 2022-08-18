@@ -36,7 +36,7 @@ const ls = [
     "\"I feel your pain\"",
     "\"Impactful\"",
     "\"Innovate\"",
-    "\"Interdisciplinary\"",
+    "\"Inter- disciplinary\"",
     "\"Journey\"",
     "Margin vs. mission",
     "Mission tradition (stewardship)",
