@@ -1,4 +1,4 @@
-document.cookie = "username=John Doe; expires=Thu, 18 Aug 2022 12:00:00 UTC";
+// document.cookie = "username=John Doe; expires=Thu, 18 Aug 2022 12:00:00 UTC";
 
 const ls = [
     "\"Add value/value-added\"",
@@ -24,7 +24,7 @@ const ls = [
     "\"Enrollments are down\"",
     "Faculty member delusional about APP",
     "Faculty member is toxically positive",
-    "Faculty member thanks Richard",
+    "Faculty member thanks presenter",
     "\"Financial equilibrium\"",
     "Funnel",
     "FYX",
@@ -36,7 +36,7 @@ const ls = [
     "\"I feel your pain\"",
     "\"Impactful\"",
     "\"Innovate\"",
-    "\"Inter-disciplinary\"",
+    "\"Interdisciplinary\"",
     "Jennifer Galovich is here?",
     "\"Journey\"",
     "Margin vs. mission",
@@ -61,7 +61,6 @@ const ls = [
     "Single president joke/ reference",
     "Slides have way too much text",
     "Someone puts too much faith in IC",
-    "Someone thanks APP committees",
     "Someone's phone rings",
     "\"Special sauce\"",
     "St. Kate's/ St. Norbert's",
@@ -69,6 +68,7 @@ const ls = [
     "Strong(er) integration",
     "Student experience/ co-curriculars",
     "Student-to-faculty ratio",
+    "Thanking committee for hard work",
     "\"Together separately\"",
     "Transactional vs. transformational",
     "Transition to 5-day schedule",
@@ -125,13 +125,96 @@ makeBoard();
 //   });
 
 
-let squares= document.querySelectorAll('.grid-item');
+function checkWinners() {
+    // const $ = document.querySelector.bind(document);
+    // const $$ = document.querySelectorAll.bind(document);
+    var winners = [
+        ['B1','I1','N1','G1','O1'],
+        ['B2','I2','N2','G2','O2'],
+        ['B3','I3','freeSpace','G3','O3'],
+        ['B4','I4','N4','G4','O4'],
+        ['B5','I5','N5','G5','O5'],
+        ['B1','B2','B3','B4','B5'],
+        ['I1','I2','I3','I4','I5'],
+        ['N1','N2','freeSpace','N4','N5'],
+        ['G1','G2','G3','G4','G5'],
+        ['O1','O2','O3','O4','O5'],
+        ['B1','I2','freeSpace','G4','O5'],
+        ['B5','I4','freeSpace','G2','O1']
+    ];
 
-squares.forEach(item => item.addEventListener('click', (e) => {
-    changeColor(item);
-}))
+    var responses = [
+        "In lieu of a prize, we can offer you a ceramic mug that is also considered taxable income.",
+        "Community Always.",
+        "Take *two* ice cream sandwiches at the next picnic. You've earned it.",
+        "Your skills are unmatched. Wanna be a Dean of something?",
+        "As a reward, you are allowed to resign from some of your committees/taskforces.",
+        "In recognition of your efforts, you will receive one unpaid overload during the semester of your choice."
+    ];
+
+    var possibleWinners = winners.length;
+
+    // Initialize selected array with c3 freebie
+    var selected = ['freeSpace'];
+
+    // // Play again, removes all previously clicked
+    // $('.again').click(function(){
+    //     $('.square').removeClass('clicked');
+    //     selected = ['freeSpace'];
+    // });
+
+    let squares= document.querySelectorAll('.grid-item');
+
+    squares.forEach(item => item.addEventListener('click', (e) => {
+        if(item.classList.contains('colorClass')){
+            item.classList.toggle("colorClass");
+            console.log("YO!");
+            console.log(selected);
+            // console.log(selected.splice(item.children[0].id));
+            selected = selected.filter(e => e !== item.children[0].id); // will return ['A', 'C']
+
+        }
+        else{
+            changeColor(item);
+            console.log("NO!");
+            // console.log(getComputedStyle(item,"background-color"));
+
+        }
+
+    }))
 
 
-const changeColor = (item) => {
-    item.classList.toggle("colorClass");
-};
+    const changeColor = (item) => {
+        item.classList.toggle("colorClass");
+        selected.push(item.children[0].id);
+        console.log(selected);
+        // console.log(item.children[0].id);
+        // console.log(item.children[0].id);
+        // console.log(selected)
+        // Compare winners array to selected array for matches
+        for(var i = 0; i < possibleWinners; i++) {
+            var cellExists = 0;
+            for(var j = 0; j < 5; j++) {
+                if($.inArray(winners[i][j], selected) > -1) {
+                    cellExists++;
+                }
+            }
+
+            // If all 5 winner cells exist in selected array alert success message
+            if(cellExists == 5) {
+                let prize = Math.floor(Math.random() * responses.length);
+                // return ls.splice(pick, 1)[0];
+                alert('\n\nBINGO!\n\nCongratulations. ' + responses[prize]);
+                console.log(selected)
+                selected = ['freeSpace']
+                console.log(selected)
+
+            }
+        }
+    };
+
+
+
+}
+
+checkWinners()
