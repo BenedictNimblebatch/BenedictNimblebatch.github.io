@@ -37,7 +37,6 @@ const ls = [
     "\"Impactful\"",
     "\"Innovate\"",
     "\"Interdisciplinary\"",
-    "Jennifer Galovich is here?",
     "\"Journey\"",
     "Margin vs. mission",
     "Mission tradition (stewardship)",
@@ -49,14 +48,15 @@ const ls = [
     "Obfuscating liberal arts",
     "Peers/ aspirants",
     "Position of strength/ strong position",
+    "Presenter asks \"...okay?\"",
     "Presenter avoids question",
     "Presenter feigns empathy",
     "Presenter laughs at own joke",
-    "Presenter thanks faculty",
+    "Presenter \"thanks\" faculty for hard work",
     "Projected enrollments/ costs",
     "\"Prudent\"",
     "Question only applies to asker",
-    "Richard asks \"...okay?\"",
+    "Retired faculty member is here?",
     "\"Right-size\"",
     "Single president joke/ reference",
     "Slides have way too much text",
@@ -204,7 +204,9 @@ function checkWinners() {
             if(cellExists == 5) {
                 let prize = Math.floor(Math.random() * responses.length);
                 // return ls.splice(pick, 1)[0];
-                alert('\n\nBINGO!\n\nCongratulations. ' + responses[prize]);
+                setTimeout(function() {
+                    alert('\n\nBINGO!\n\nCongratulations. ' + responses[prize]);
+                },10)
                 console.log(selected)
                 selected = ['freeSpace']
                 console.log(selected)
